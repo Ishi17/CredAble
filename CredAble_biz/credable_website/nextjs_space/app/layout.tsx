@@ -1,43 +1,23 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
+import './globals.css';
+import { Inter } from 'next/font/google';
+import Navbar from '@/components/navbar';
+import ChatWidget from '@/components/chat-widget';
 
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
-  variable: "--font-inter",
-});
+const inter = Inter({ subsets: ['latin'] });
 
-export const dynamic = "force-dynamic";
-
-export const metadata: Metadata = {
-  title: "CredAble – AI Operating System for Business Credit",
-  description:
-    "Ingest unstructured financial data. Reason across cashflows, networks and policy. Generate lender-grade decisions in seconds.",
-  metadataBase: new URL(process.env.NEXTAUTH_URL || "http://localhost:3000"),
-  icons: {
-    icon: "/favicon.svg",
-    shortcut: "/favicon.svg",
-  },
-  openGraph: {
-    title: "CredAble – AI Operating System for Business Credit",
-    description:
-      "Ingest unstructured financial data. Reason across cashflows, networks and policy. Generate lender-grade decisions in seconds.",
-    images: ["/og-image.png"],
-  },
+export const metadata = {
+  title: 'CredAble - AI Operating System for Supply Chain Finance',
+  description: 'Transform your working capital and supply chain finance with intelligent AI.',
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <head>
-        <script src="https://apps.abacus.ai/chatllm/appllm-lib.js"></script>
-      </head>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <Navbar />
+        <main className="pt-12">{children}</main>
+        <ChatWidget />
+      </body>
     </html>
   );
 }

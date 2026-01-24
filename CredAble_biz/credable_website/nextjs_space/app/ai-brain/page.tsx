@@ -497,11 +497,11 @@ const NeuralNetworkViz = () => {
   };
 
   return (
-    <div className="relative w-full h-screen overflow-hidden bg-slate-900">
+    <div className="relative w-full h-screen pt-14 overflow-hidden bg-slate-900">
       <div ref={containerRef} className="w-full h-full" style={{ cursor: isDraggingUI ? 'grabbing' : 'grab' }} />
 
       {/* UI Overlay */}
-      <div className="absolute top-8 left-8 text-white z-10">
+      <div className="absolute top-20 left-8 text-white z-10">
         <h1 className="text-4xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-orange-400">
           CredAble AI Brain
         </h1>
@@ -510,8 +510,8 @@ const NeuralNetworkViz = () => {
         </p>
       </div>
 
-      {/* Controls */}
-      <div className="absolute top-8 right-8 z-10 flex gap-2">
+      {/* Controls - Bottom Left */}
+      <div className="absolute bottom-8 left-8 z-10 flex gap-2">
         <button
           onClick={goToNextNode}
           className="bg-white/10 backdrop-blur-md text-white px-4 py-2 rounded-lg hover:bg-white/20 transition flex items-center gap-2"
@@ -519,7 +519,6 @@ const NeuralNetworkViz = () => {
           <ChevronRight size={16} />
           Next
         </button>
-
         <button
           onClick={() => setIsAutoTour(!isAutoTour)}
           className="bg-white/10 backdrop-blur-md text-white px-4 py-2 rounded-lg hover:bg-white/20 transition flex items-center gap-2"
