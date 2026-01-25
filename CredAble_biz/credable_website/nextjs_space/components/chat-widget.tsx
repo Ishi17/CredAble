@@ -1,6 +1,9 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+
+const CHAT_API_URL = process.env.NEXT_PUBLIC_CHAT_API_URL || 'http://localhost:8000/chat';
+const CHAT_API_KEY = process.env.NEXT_PUBLIC_CHAT_API_KEY;
 
 export default function ChatWidget() {
   const [isChatExpanded, setIsChatExpanded] = useState(false);
@@ -13,6 +16,7 @@ export default function ChatWidget() {
   // Separate inputs: pill input + panel input
   const [pillInput, setPillInput] = useState('');
   const [chatInput, setChatInput] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const chatInputRef = useRef<HTMLInputElement>(null);
 
@@ -21,35 +25,76 @@ export default function ChatWidget() {
     setIsChatExpanded(false);
   };
 
+  const sendToChatbot = useCallback(
+    async (
+      userMessage: string,
+      messages: { role: 'user' | 'assistant'; content: string }[]
+    ) => {
+      // Convert to API format: [ ["User question 1", "Assistant answer 1"], ... ]
+      const history: [string, string][] = [];
+      for (let i = 0; i + 1 < messages.length; i += 2) {
+        if (messages[i].role === 'user' && messages[i + 1].role === 'assistant') {
+          history.push([messages[i].content, messages[i + 1].content]);
+        }
+      }
+
+      setIsLoading(true);
+      try {
+        const headers: Record<string, string> = {
+          'Content-Type': 'application/json',
+          ...(CHAT_API_KEY && { 'X-API-Key': CHAT_API_KEY }),
+        };
+
+        const res = await fetch(CHAT_API_URL, {
+          method: 'POST',
+          headers,
+          body: JSON.stringify({ message: userMessage, history }),
+        });
+
+        if (!res.ok) {
+          throw new Error(`Chat API error: ${res.status} ${res.statusText}`);
+        }
+
+        const data = await res.json().catch(() => ({}));
+        const reply =
+          (typeof data === 'string' ? data : null) ||
+          data?.response ||
+          data?.reply ||
+          data?.answer ||
+          data?.message ||
+          'Sorry, I couldn\'t get a response from the chatbot.';
+
+        setChatMessages((prev) => [
+          ...prev,
+          { role: 'assistant', content: String(reply) },
+        ]);
+      } catch (err) {
+        const msg = err instanceof Error ? err.message : 'Unknown error';
+        setChatMessages((prev) => [
+          ...prev,
+          {
+            role: 'assistant',
+            content: `Unable to reach the chatbot (${CHAT_API_URL}). Please ensure it's running locally. Error: ${msg}`,
+          },
+        ]);
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    []
+  );
+
   const openPanelAndSend = (message: string) => {
     const trimmed = message.trim();
     if (!trimmed) return;
 
-    // Open panel
     setIsChatPanelOpen(true);
-
-    // Push user message into chat
     setChatMessages((prev) => [...prev, { role: 'user', content: trimmed }]);
-
-    // Clear pill input + panel input
     setPillInput('');
     setChatInput('');
-
-    // Focus panel input once opened
     setTimeout(() => chatInputRef.current?.focus(), 250);
 
-    // Fake assistant response (uses the actual message)
-    setTimeout(() => {
-      setChatMessages((prev) => [
-        ...prev,
-        {
-          role: 'assistant',
-          content: `Thanks for your question about "${trimmed.slice(0, 50)}${
-            trimmed.length > 50 ? '...' : ''
-          }". CredAble's AI engine analyzes multiple data points including cashflows, GST compliance, and counterparty networks to provide instant credit decisions. Would you like to try our live demo?`,
-        },
-      ]);
-    }, 800);
+    sendToChatbot(trimmed, chatMessages);
   };
 
   const sendPanelMessage = () => {
@@ -58,18 +103,7 @@ export default function ChatWidget() {
 
     setChatMessages((prev) => [...prev, { role: 'user', content: trimmed }]);
     setChatInput('');
-
-    setTimeout(() => {
-      setChatMessages((prev) => [
-        ...prev,
-        {
-          role: 'assistant',
-          content: `Got it — you said: "${trimmed.slice(0, 60)}${
-            trimmed.length > 60 ? '...' : ''
-          }". Want me to explain how CredAble would assess that in a credit memo?`,
-        },
-      ]);
-    }, 800);
+    sendToChatbot(trimmed, chatMessages);
   };
 
   // If user closes panel, keep pill collapsed
@@ -200,6 +234,21 @@ export default function ChatWidget() {
               <div className="chat-message-content">{msg.content}</div>
             </div>
           ))}
+
+          {isLoading && (
+            <div className="chat-message assistant">
+              <div className="chat-message-avatar">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <circle cx="12" cy="12" r="10" />
+                </svg>
+              </div>
+              <div className="chat-message-content chat-loading">
+                <span className="chat-typing-dot" />
+                <span className="chat-typing-dot" />
+                <span className="chat-typing-dot" />
+              </div>
+            </div>
+          )}
         </div>
 
         <div className="chat-panel-input">
@@ -210,13 +259,19 @@ export default function ChatWidget() {
             value={chatInput}
             onChange={(e) => setChatInput(e.target.value)}
             onKeyDown={(e) => {
-              if (e.key === 'Enter') {
+              if (e.key === 'Enter' && !isLoading) {
                 e.preventDefault();
                 sendPanelMessage();
               }
             }}
+            disabled={isLoading}
           />
-          <button className="chat-send-btn" onClick={sendPanelMessage} disabled={!chatInput.trim()}>
+          <button
+            className="chat-send-btn"
+            onClick={sendPanelMessage}
+            disabled={!chatInput.trim() || isLoading}
+            title={isLoading ? 'Waiting for response...' : undefined}
+          >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <line x1="22" y1="2" x2="11" y2="13" />
               <polygon points="22 2 15 22 11 13 2 9 22 2" />
