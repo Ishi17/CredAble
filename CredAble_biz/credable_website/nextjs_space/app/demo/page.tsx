@@ -69,7 +69,7 @@ export default function HomePage() {
 
   const [demoStep, setDemoStep] = useState(0); // 0=intro, 1=ready, 2=running
   const [demoInput, setDemoInput] = useState("");
-  const demoCompany = "Tata Motors";
+  const demoCompany = "ACME Traders";
 
   const [showDemoMouse, setShowDemoMouse] = useState(false);
   const [demoTypingDone, setDemoTypingDone] = useState(false);
