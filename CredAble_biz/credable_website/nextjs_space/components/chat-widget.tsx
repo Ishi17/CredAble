@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-const CHAT_API_URL = process.env.NEXT_PUBLIC_CHAT_API_URL || 'http://localhost:8000/chat';
+const CHAT_API_URL = process.env.NEXT_PUBLIC_CHAT_API_URL || 'https://credable-chatbot.onrender.com/chat';
 const CHAT_API_KEY = process.env.NEXT_PUBLIC_CHAT_API_KEY;
 
 export default function ChatWidget() {
