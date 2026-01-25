@@ -1,6 +1,5 @@
 {
-  "/los-platform/for-credit-managers/page": "app/los-platform/for-credit-managers/page.js",
-  "/demo/page": "app/demo/page.js",
   "/page": "app/page.js",
+  "/demo/page": "app/demo/page.js",
   "/los-platform/page": "app/los-platform/page.js"
 }

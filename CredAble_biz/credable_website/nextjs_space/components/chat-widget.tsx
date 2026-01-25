@@ -2,9 +2,6 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-const CHAT_API_URL = process.env.NEXT_PUBLIC_CHAT_API_URL || 'https://credable-chatbot.onrender.com/chat';
-const CHAT_API_KEY = process.env.NEXT_PUBLIC_CHAT_API_KEY;
-
 export default function ChatWidget() {
   const [isChatExpanded, setIsChatExpanded] = useState(false);
   const [isChatPanelOpen, setIsChatPanelOpen] = useState(false);
@@ -40,14 +37,9 @@ export default function ChatWidget() {
 
       setIsLoading(true);
       try {
-        const headers: Record<string, string> = {
-          'Content-Type': 'application/json',
-          ...(CHAT_API_KEY && { 'X-API-Key': CHAT_API_KEY }),
-        };
-
-        const res = await fetch(CHAT_API_URL, {
+        const res = await fetch('/api/chat', {
           method: 'POST',
-          headers,
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ message: userMessage, history }),
         });
 
@@ -56,13 +48,7 @@ export default function ChatWidget() {
         }
 
         const data = await res.json().catch(() => ({}));
-        const reply =
-          (typeof data === 'string' ? data : null) ||
-          data?.response ||
-          data?.reply ||
-          data?.answer ||
-          data?.message ||
-          'Sorry, I couldn\'t get a response from the chatbot.';
+        const reply = data?.reply ?? 'Sorry, I couldn\'t get a response from the chatbot.';
 
         setChatMessages((prev) => [
           ...prev,
@@ -74,7 +60,7 @@ export default function ChatWidget() {
           ...prev,
           {
             role: 'assistant',
-            content: `Unable to reach the chatbot (${CHAT_API_URL}). Please ensure it's running locally. Error: ${msg}`,
+            content: `Unable to reach the chatbot. Please try again. Error: ${msg}`,
           },
         ]);
       } finally {
