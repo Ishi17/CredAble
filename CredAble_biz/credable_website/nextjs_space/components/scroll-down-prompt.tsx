@@ -27,7 +27,7 @@ export function ScrollDownPrompt({ showInAllSections = false }: ScrollDownPrompt
         const el = document.querySelector('.overflow-y-auto, [style*="overflow-y-auto"]') as HTMLElement | null;
         return el && el.scrollHeight > el.clientHeight ? el : null;
       })();
-    scrollContainerRef.current = scrollContainer ?? null;
+    scrollContainerRef.current = scrollContainer instanceof HTMLElement ? scrollContainer : null;
 
     const onScroll = () => {
       if (showInAllSections) {
@@ -77,7 +77,7 @@ export function ScrollDownPrompt({ showInAllSections = false }: ScrollDownPrompt
 
   // Portal to document.body so position:fixed is viewport-relative (parent transform/overflow won't clip it)
   if (typeof document !== 'undefined' && mounted) {
-    return createPortal(content, document.body);
+    return createPortal(content as Parameters<typeof createPortal>[0], document.body);
   }
   return content;
 }
