@@ -15,15 +15,12 @@ export default function ForBankTransformationTeamsPage() {
   return (
     <div className="h-screen bg-[#0a0f1a] text-white pt-[104px] overflow-y-auto" style={{ scrollSnapType: 'y mandatory' }}>
       {/* Ambient Intelligence Hero */}
-      <PersonaHero persona="bank-transformation" />
+      <PersonaHero persona="bank-transformation" showScrollPromptInAllSections />
 
       {/* 1. Bank Admin: Configure Programs Instantly */}
       <BankAdminSection />
 
-      {/* 2. CredAble AI Assistant */}
-      <CredAbleAIAssistantSection />
-
-      {/* 3. AI-Powered Business Rules Engine */}
+      {/* 2. AI-Powered Business Rules Engine */}
       <AIBusinessRulesSection />
 
       {/* Closing CTA */}

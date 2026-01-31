@@ -8,6 +8,7 @@ import {
   WhyCredAbleSection,
   ReadyToTransformSection,
 } from '@/components/los-sections';
+import { ScrollDownPrompt } from '@/components/scroll-down-prompt';
 
 const personaCards = [
   { href: '/los-platform/for-credit-managers', title: 'For Credit Managers', line: 'Sharper credit decisions, powered by intelligence'},
@@ -53,6 +54,8 @@ export default function LOSPlatformPage() {
           </div>
         </div>
       </section>
+
+      <ScrollDownPrompt />
 
       {/* Explore what CredAble Does - Persona Cards */}
       <RevealSection className="py-20 px-6 bg-slate-900/30">

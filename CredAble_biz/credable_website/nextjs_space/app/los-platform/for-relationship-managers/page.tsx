@@ -14,7 +14,7 @@ export default function ForRelationshipManagersPage() {
   return (
     <div className="h-screen bg-[#0a0f1a] text-white pt-[104px] overflow-y-auto" style={{ scrollSnapType: 'y mandatory' }}>
       {/* Ambient Intelligence Hero */}
-      <PersonaHero persona="relationship-managers" />
+      <PersonaHero persona="relationship-managers" showScrollPromptInAllSections />
 
       {/* 1. Risk Intelligence */}
       <RiskIntelligenceSection />

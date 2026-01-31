@@ -934,7 +934,7 @@ export default function HomePage() {
 
             {/* Button shows AFTER analysis */}
             <button
-              className="btn btn-ghost full-results-btn"
+              className="btn btn-primary full-results-btn"
               id="openResults"
               ref={openResultsBtnRef}
               type="button"

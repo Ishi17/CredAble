@@ -602,6 +602,9 @@ video {
 .bottom-0 {
   bottom: 0px;
 }
+.bottom-20 {
+  bottom: 5rem;
+}
 .bottom-8 {
   bottom: 2rem;
 }
@@ -757,6 +760,9 @@ video {
 }
 .z-\[1\] {
   z-index: 1;
+}
+.z-\[999\] {
+  z-index: 999;
 }
 .-mx-1 {
   margin-left: -0.25rem;
@@ -1128,6 +1134,21 @@ video {
 }
 .transform-gpu {
   transform: translate3d(var(--tw-translate-x), var(--tw-translate-y), 0) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+@keyframes bounce {
+
+  0%, 100% {
+    transform: translateY(-25%);
+    animation-timing-function: cubic-bezier(0.8,0,1,1);
+  }
+
+  50% {
+    transform: none;
+    animation-timing-function: cubic-bezier(0,0,0.2,1);
+  }
+}
+.animate-bounce {
+  animation: bounce 1s infinite;
 }
 @keyframes pulse {
 
@@ -1690,15 +1711,6 @@ video {
 .pt-1 {
   padding-top: 0.25rem;
 }
-.pt-14 {
-  padding-top: 3.5rem;
-}
-.pt-16 {
-  padding-top: 4rem;
-}
-.pt-24 {
-  padding-top: 6rem;
-}
 .pt-4 {
   padding-top: 1rem;
 }
@@ -1834,6 +1846,10 @@ video {
 }
 .text-orange-400\/80 {
   color: rgb(251 146 60 / 0.8);
+}
+.text-orange-500 {
+  --tw-text-opacity: 1;
+  color: rgb(249 115 22 / var(--tw-text-opacity));
 }
 .text-orange-500\/60 {
   color: rgb(249 115 22 / 0.6);
@@ -2696,10 +2712,36 @@ header {
   font-weight: 600;
 }
 
+@keyframes subtle-bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
 .full-results-btn {
-  margin-top: 10px;
-  width: 100%;
+  margin: 14px auto 0;
+  width: auto;
+  max-width: 280px;
+  padding: 14px 32px;
   border-radius: 14px;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  box-shadow: 0 6px 20px rgba(247, 147, 30, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  animation: subtle-bounce 0.75s ease-in-out infinite;
+  display: block;
+}
+.full-results-btn:hover {
+  animation: none;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(247, 147, 30, 0.45);
+}
+.full-results-btn:active {
+  transform: translateY(0);
 }
 
 /* Hidden mounts (timeline + options live here until modal open) */
@@ -5103,6 +5145,10 @@ header {
 .hover\:text-muted-foreground:hover {
   color: hsl(var(--muted-foreground));
 }
+.hover\:text-orange-300:hover {
+  --tw-text-opacity: 1;
+  color: rgb(253 186 116 / var(--tw-text-opacity));
+}
 .hover\:text-orange-400:hover {
   --tw-text-opacity: 1;
   color: rgb(251 146 60 / var(--tw-text-opacity));
@@ -5702,11 +5748,6 @@ header {
     text-align: left;
   }
 
-  .sm\:text-5xl {
-    font-size: 3rem;
-    line-height: 1;
-  }
-
   .sm\:text-4xl {
     font-size: 2.25rem;
     line-height: 2.5rem;
@@ -5775,11 +5816,6 @@ header {
 
   .md\:text-6xl {
     font-size: 3.75rem;
-    line-height: 1;
-  }
-
-  .md\:text-7xl {
-    font-size: 4.5rem;
     line-height: 1;
   }
 }

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, FileText, Gauge, ShieldCheck, TrendingUp, Scale, GitBranch, Settings, Plug, Cloud, Lock, Upload, MessageCircle, CheckCircle, Clock, Loader, Flag, Star, User, Activity, Lightbulb } from 'lucide-react';
 import { RevealSection } from './los-sections';
+import { ScrollDownPrompt } from './scroll-down-prompt';
 
 // Persona configurations
 export type PersonaType = 'credit-managers' | 'bank-transformation' | 'borrowers' | 'relationship-managers';
@@ -73,7 +74,13 @@ const personaConfig = {
 
 const aiPipeline = ['Perception', 'Understanding', 'Reasoning', 'Judgment', 'Action'];
 
-export function PersonaHero({ persona }: { persona: PersonaType }) {
+type PersonaHeroProps = {
+  persona: PersonaType;
+  /** When true, scroll prompt shows across all sections; otherwise only in hero */
+  showScrollPromptInAllSections?: boolean;
+};
+
+export function PersonaHero({ persona, showScrollPromptInAllSections = false }: PersonaHeroProps) {
   const config = personaConfig[persona];
   const [animationComplete, setAnimationComplete] = useState(false);
 
@@ -171,6 +178,8 @@ export function PersonaHero({ persona }: { persona: PersonaType }) {
           </div>
         </div>
       </div>
+
+      <ScrollDownPrompt showInAllSections={showScrollPromptInAllSections} />
 
       {/* Hero-specific animation styles */}
       <style jsx>{`
