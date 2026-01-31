@@ -1,9 +1,9 @@
 {
   "pages": {
-    "/page": [
+    "/los-platform/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/page.js"
+      "static/chunks/app/los-platform/page.js"
     ],
     "/layout": [
       "static/chunks/webpack.js",
@@ -11,25 +11,15 @@
       "static/css/app/layout.css",
       "static/chunks/app/layout.js"
     ],
-    "/los-platform/page": [
+    "/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/los-platform/page.js"
+      "static/chunks/app/page.js"
     ],
     "/los-platform/for-credit-managers/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/los-platform/for-credit-managers/page.js"
-    ],
-    "/los-platform/for-bank-transformation-teams/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/los-platform/for-bank-transformation-teams/page.js"
-    ],
-    "/demo/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/demo/page.js"
     ]
   }
 }
