@@ -794,7 +794,7 @@ export default function HomePage() {
     <>
       <canvas ref={canvasRef} id="aiBg"></canvas>
 
-      <main className="pt-14">
+      <main className="pt-[104px]">
         <section className="hero">
           {/* TOP: HERO TEXT */}
           <div className="hero-text">

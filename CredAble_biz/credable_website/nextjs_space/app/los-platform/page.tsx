@@ -10,10 +10,10 @@ import {
 } from '@/components/los-sections';
 
 const personaCards = [
-  { href: '/los-platform/for-credit-managers', title: 'For Credit Managers' },
-  { href: '/los-platform/for-bank-transformation-teams', title: 'For Bank Transformation Teams' },
-  { href: '/los-platform/for-borrowers', title: 'For Borrowers' },
-  { href: '/los-platform/for-relationship-managers', title: 'For Relationship managers' },
+  { href: '/los-platform/for-credit-managers', title: 'For Credit Managers', line: 'Sharper credit decisions, powered by intelligence'},
+  { href: '/los-platform/for-bank-transformation-teams', title: 'For Bank Transformation Teams', line: 'Configure, deploy, and scale lending faster' },
+  { href: '/los-platform/for-borrowers', title: 'For Borrowers', line: 'Smarter insights for better client conversations' },
+  { href: '/los-platform/for-relationship-managers', title: 'For Relationship managers', line: 'Frictionless, guided borrowing powered by AI' },
 ];
 
 export default function LOSPlatformPage() {
@@ -21,17 +21,17 @@ export default function LOSPlatformPage() {
 
   return (
     <div
-      className="h-screen bg-[#0a0f1a] text-white pt-16 overflow-y-auto"
+      className="h-screen bg-[#0a0f1a] text-white pt-[104px] overflow-y-auto"
       style={{ scrollSnapType: 'y mandatory' }}
     >
       {/* Hero Section */}
       <section className="py-20 px-6 scroll-snap-align-start los-fullscreen">
         <div className="max-w-5xl mx-auto text-center w-full">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent block">
               AI-Powered
-            </span>{' '}
-            Loan Origination System (LOS)
+            </span>
+            <span className="block text-3xl md:text-5xl">Loan Origination System (LOS)</span>
           </h1>
           <p className="text-xl text-slate-400 mb-4">
             The intelligent platform that transforms how banks process, analyze, and approve business credit.
@@ -58,7 +58,7 @@ export default function LOSPlatformPage() {
       <RevealSection className="py-20 px-6 bg-slate-900/30">
         <div id="how-it-works" className="max-w-5xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-            Explore what CredAble Does
+            CredAble AI, designed for every role that shapes credit
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -72,8 +72,11 @@ export default function LOSPlatformPage() {
                 <h3 className="text-xl font-bold text-white group-hover:text-orange-400 transition-colors">
                   {card.title}
                 </h3>
+                <p className="text-slate-400 mt-2 text-base">
+                  {card.line}
+                </p>
                 <p className="text-slate-400 mt-2 text-sm">
-                  Learn how CredAble empowers {card.title.toLowerCase().replace('for ', '')} →
+                  Know more →
                 </p>
               </Link>
             ))}

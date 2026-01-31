@@ -15,7 +15,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body className={inter.className}>
         <Navbar />
-        <main className="pt-12">{children}</main>
+        <main>{children}</main>
         <ChatWidget />
       </body>
     </html>

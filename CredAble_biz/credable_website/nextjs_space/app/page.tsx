@@ -133,13 +133,13 @@ export default function HomePage() {
   ];
 
   return (
-    <div className="h-screen bg-[#0a0f1a] text-white overflow-hidden">
+    <div ref={containerRef} className="h-screen bg-[#0a0f1a] text-white overflow-hidden">
       {/* Neural background */}
       <svg className="absolute inset-0 w-full h-full opacity-20">
         <defs>
           <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#3B82F6" />
-            <stop offset="100%" stopColor="#F97316" />
+            <stop offset="0%" stopColor="#F9D293" />
+            <stop offset="100%" stopColor="#F5971B" />
           </linearGradient>
         </defs>
         {[...Array(40)].map((_, i) => (
@@ -156,7 +156,7 @@ export default function HomePage() {
       </svg>
 
       {/* Step container - no native scroll */}
-      <div ref={containerRef} className="h-full overflow-hidden relative z-10">
+      <div className="h-full overflow-hidden relative z-10">
         <div className="h-full">
           
           {/* Fixed content layer */}
@@ -167,14 +167,14 @@ export default function HomePage() {
               className="text-center transition-all duration-700 px-4"
               style={{ opacity: 1 - layer1to2 * 1.5 }}
             >
-              <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-6 flex flex-wrap justify-center items-baseline gap-x-4 md:gap-x-6 gap-y-2">
+              <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-6 flex flex-wrap justify-center items-baseline gap-x-4 md:gap-x-6 gap-y-2">
                 <span className="inline-block text-slate-400">We</span>
                 {cards.map((card, idx) => {
                   const colors = [
-                    'from-blue-400 to-cyan-400',
-                    'from-cyan-400 to-teal-400',
-                    'from-teal-400 to-orange-400',
-                    'from-orange-400 to-orange-500'
+                    'from-[#F9D293] to-[#FCCB0D]',
+                    'from-[#FCCB0D] to-[#F5971B]',
+                    'from-[#F5971B] to-[#FCCB0D]',
+                    'from-[#FCCB0D] to-[#F9D293]'
                   ];
                   return (
                     <span
@@ -212,10 +212,10 @@ export default function HomePage() {
               const showDesc = layer1to2 > 0.5 && layer2to3 < 0.7;
 
               const colors = [
-                'from-blue-400 to-cyan-400',
-                'from-cyan-400 to-teal-400',
-                'from-teal-400 to-orange-400',
-                'from-orange-400 to-orange-500'
+                'from-[#F9D293] to-[#FCCB0D]',
+                'from-[#FCCB0D] to-[#F5971B]',
+                'from-[#F5971B] to-[#FCCB0D]',
+                'from-[#FCCB0D] to-[#F9D293]'
               ];
 
               return (
@@ -237,7 +237,7 @@ export default function HomePage() {
                       hover:border-white/20
                       ${layer2to3 > 0.8 ? 'opacity-0' : ''}`}
                   >
-                    <card.icon className="text-orange-400 mb-3" size={28} />
+                    <card.icon className="mb-3" style={{ color: 'var(--credable-orange)' }} size={28} />
                     <h3 className={`text-xl font-bold bg-gradient-to-r ${colors[idx]} bg-clip-text text-transparent mb-2`}>
                       {card.word}
                     </h3>
@@ -259,7 +259,7 @@ export default function HomePage() {
             >
               <Link
                 href="/demo"
-                className="flex items-center gap-3 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold px-10 py-5 rounded-full text-xl shadow-2xl shadow-orange-500/30 hover:shadow-orange-500/50 transition-all"
+                className="flex items-center gap-3 bg-gradient-to-r from-[#F5971B] to-[#FCCB0D] hover:from-[#F5971B] hover:to-[#F9D293] text-white font-bold px-10 py-5 rounded-full text-xl shadow-2xl shadow-[#F5971B]/30 hover:shadow-[#F5971B]/50 transition-all"
               >
                 Launch Demo
                 <ArrowRight size={24} />
@@ -286,7 +286,7 @@ export default function HomePage() {
                   }
                 }}
                 className={`h-2 rounded-full transition-all duration-300 pointer-events-auto ${
-                  currentStep === step ? 'bg-orange-400 w-6' : 'bg-slate-600 w-2 hover:bg-slate-500'
+                  currentStep === step ? 'bg-[#F5971B] w-6' : 'bg-slate-600 w-2 hover:bg-slate-500'
                 }`}
               />
             ))}

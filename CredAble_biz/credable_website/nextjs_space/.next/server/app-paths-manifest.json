@@ -1,5 +1,7 @@
 {
-  "/page": "app/page.js",
+  "/los-platform/for-credit-managers/page": "app/los-platform/for-credit-managers/page.js",
+  "/ai-brain/page": "app/ai-brain/page.js",
   "/demo/page": "app/demo/page.js",
-  "/api/chat/route": "app/api/chat/route.js"
+  "/page": "app/page.js",
+  "/los-platform/page": "app/los-platform/page.js"
 }

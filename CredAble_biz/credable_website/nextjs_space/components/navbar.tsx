@@ -53,13 +53,13 @@ export default function Navbar() {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0a0f1a] border-b border-slate-800">
-      <div className="max-w-7xl mx-auto px-6 py-1 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-6 py-[21px] flex items-center justify-between">
         <Link href="/">
           <Image
-            src="/credable-logo.png"
+            src="/credable-logo-full.png"
             alt="CredAble"
-            width={110 * 0.7}
-            height={32 * 0.7}
+            width={Math.round(110 * 1.4 * 1.33)}
+            height={Math.round(32 * 1.4 * 1.33)}
             className="opacity-100"
           />
         </Link>

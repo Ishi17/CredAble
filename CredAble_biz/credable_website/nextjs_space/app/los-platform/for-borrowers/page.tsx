@@ -13,7 +13,7 @@ export default function ForBorrowersPage() {
   useLOSStyles();
 
   return (
-    <div className="h-screen bg-[#0a0f1a] text-white pt-16 overflow-y-auto" style={{ scrollSnapType: 'y mandatory' }}>
+    <div className="h-screen bg-[#0a0f1a] text-white pt-[104px] overflow-y-auto" style={{ scrollSnapType: 'y mandatory' }}>
       {/* Ambient Intelligence Hero */}
       <PersonaHero persona="borrowers" />
 

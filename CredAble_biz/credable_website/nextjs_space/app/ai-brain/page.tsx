@@ -497,7 +497,7 @@ const NeuralNetworkViz = () => {
   };
 
   return (
-    <div className="relative w-full h-screen pt-14 overflow-hidden bg-slate-900">
+    <div className="relative w-full h-screen overflow-hidden bg-slate-900">
       <div ref={containerRef} className="w-full h-full" style={{ cursor: isDraggingUI ? 'grabbing' : 'grab' }} />
 
       {/* UI Overlay */}
